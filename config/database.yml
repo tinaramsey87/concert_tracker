@@ -1,0 +1,7 @@
+development:
+  database: concert_tracker_development
+  adapter: postgresql
+
+test:
+  database: concert_track_test
+  adapter: postgresql

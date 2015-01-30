@@ -1,0 +1,21 @@
+<h2>Bands</h2>
+<p>Click on band name to see venues they've played, edit, or delete them</p>
+<br>
+<% if @bands.any? %>
+  <% @bands.each do |band| %>
+    <ul>
+      <li><%= band.name %></li>
+    </ul>
+  <% end %>
+<% else %>
+<p>Add new band name below</p>
+<% end %>
+
+<br>
+<h3>Add a new band:</h3>
+<form id="form_id" action="/bands" method="post">
+  <label for="band">Band name:</label>
+  <input id="band" name="band" type="text">
+
+  <button type="submit">Add Band</button>
+</form>
