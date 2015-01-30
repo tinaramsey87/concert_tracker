@@ -20,7 +20,7 @@ post('/venues') do
   venue_name = params["venue"]
   @venue = Venue.create({ :name => venue_name })
 
-  redirect ('/')
+  erb(:venue_success)
 end
 
 get('/bands/:id') do
@@ -57,4 +57,11 @@ patch('/bands/:id') do
   @venues = @band.venues
 
   erb(:band_page)
+end
+
+delete('/bands/:id') do
+  @band = Band.find(params["id"])
+  @band.destroy
+
+  redirect('/')
 end

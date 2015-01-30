@@ -13,10 +13,17 @@
 </form>
 <br>
 <h3>Update band name:</h3>
-<form class="form group" action="/bands/<%= @band.id %>" method="post">
+<form class="form-group" action="/bands/<%= @band.id %>" method="post">
   <input type="hidden" name="_method" value="patch">
   <label for="new_name">Enter new band name:</label>
   <input type="text" name="new_name" id="new_name">
 
-  <button type="submit" class="btn btn sm btn-warning">Update Name</button>
+  <button type="submit" class="btn btn-sm btn-warning">Update Name</button>
 </form>
+<br>
+<form class="form-group" action="/bands/<%= @band.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn btn-med btn-danger">Delete This Band</button>
+</form>
+<br>
+<a href="/">Return to the Main Page</a>
