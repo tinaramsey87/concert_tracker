@@ -1,0 +1,16 @@
+<h2> <%= @band.name %> </h2>
+
+<h3>They've played at:</h3>
+<% if @venues.any? %>
+  <% @band.venues.each do |venue| %>
+  <ul>
+    <li><%= venue.name %></li>
+  </ul>
+  <% end %>
+<% else %>
+  <p>They've not played any venues yet. Click edit to add venues.</p>
+<% end %>
+
+<h3><a href="/bands/<%= @band.id %>/edit">Edit this band</a></h3>
+
+<a href="/">Return to the Main Page</a>
