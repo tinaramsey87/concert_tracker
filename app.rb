@@ -5,6 +5,7 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get('/') do
   @bands = Band.all
+  @venues = Venue.all
 
   erb(:index)
 end
@@ -12,13 +13,12 @@ end
 post('/bands') do
   band_name = params["band"]
   @band = Band.create({ :name => band_name })
-
   redirect back
 end
 
 post('/venues') do
   venue_name = params["venue"]
-  @venue = Venue.create({ :name => venue_name })
+  @venue = Venue.create({ :name => venue_name, :played => false })
 
   erb(:venue_success)
 end
@@ -45,7 +45,7 @@ end
 
 get('/bands/:id/edit') do
   @band = Band.find(params["id"])
-  @venues = Venue.all
+  @venues = Venue.not_played
 
   erb(:band_edit_page)
 end
@@ -62,6 +62,13 @@ end
 delete('/bands/:id') do
   @band = Band.find(params["id"])
   @band.destroy
+
+  redirect('/')
+end
+
+delete('/venues/:id') do
+  @venue = Venue.find(params["id"])
+  @venue.destroy
 
   redirect('/')
 end

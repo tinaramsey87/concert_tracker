@@ -1,19 +1,15 @@
 class Band < ActiveRecord::Base
   validates :name, :presence => true
+  validates :name, :uniqueness => true
   before_save(:capitalize_name)
-  before_create(:check_exists)
   has_and_belongs_to_many(:venues)
 
   define_method(:capitalize_name) do
-    self.name=(name.capitalize)
-  end
-
-  define_method(:check_exists) do
-    if
-    Band.exists?({ :name => self.name })
-    self.update
-    else
-      self.save
+    band_name_words = []
+    words = self.name.downcase.split(" ")
+    words.each do |word|
+      band_name_words.push(word.capitalize!)
     end
+    self.name = band_name_words.join(" ")
   end
 end

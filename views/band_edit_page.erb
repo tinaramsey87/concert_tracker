@@ -6,8 +6,12 @@
 
 <form class="form-group" action="/band_venues/<%= @band.id %>" method="post">
   <input type="hidden" value="<%= @band.id %>">
-  <% Venue.all.each do |venue| %>
-  <input type="checkbox" name="venue_ids[]" value="<%= venue.id %>"><%= venue.name %><br>
+  <% @venues.each do |venue| %>
+    <% if @band.venues.include?(venue) %>
+      <% puts "already played here" %>
+      <% else %>
+      <input type="checkbox" name="venue_ids[]" value="<%= venue.id %>"><%= venue.name %><br>
+      <% end %>
   <% end %>
   <button type="submit" class="btn btn-sm btn-info">Add Venue(s)</button>
 </form>
